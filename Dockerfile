@@ -1,5 +1,5 @@
 # В этом образе нет ни Rust, ни Node.js - только среда для запуска!
-FROM debian:bullseye-slim
+FROM --platform=linux/amd64 debian:bullseye-slim
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y ca-certificates libssl1.1 sqlite3 && rm -rf /var/lib/apt/lists/*
