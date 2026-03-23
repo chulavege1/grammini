@@ -1,0 +1,335 @@
+/* SRS Review Page Styles */
+
+.review-app {
+    min-height: 100vh;
+    background: var(--bg-primary);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.review-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.progress-info {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+/* Content */
+.review-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    padding-bottom: 100px;
+}
+
+/* No Cards State */
+.no-cards {
+    text-align: center;
+    padding: 2rem;
+}
+
+.no-cards.hidden {
+    display: none;
+}
+
+.no-cards .empty-icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.no-cards h2 {
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.no-cards p {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Flashcard Container */
+.flashcard-container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.flashcard-container.hidden {
+    display: none;
+}
+
+/* Flashcard */
+.flashcard {
+    width: 100%;
+    height: 300px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flashcard.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 16px;
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-primary));
+}
+
+.flashcard:hover .flashcard-front,
+.flashcard:hover .flashcard-back {
+    border-color: var(--accent);
+}
+
+.category-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.category-badge.vocabulary {
+    background: #3b82f6;
+    color: white;
+}
+
+.category-badge.grammar {
+    background: #8b5cf6;
+    color: white;
+}
+
+.category-badge.error {
+    background: #ef4444;
+    color: white;
+}
+
+.category-badge.idiom {
+    background: #f59e0b;
+    color: white;
+}
+
+.category-badge.phrase {
+    background: #10b981;
+    color: white;
+}
+
+.card-term {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.card-definition {
+    font-size: 1.25rem;
+    color: var(--accent);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.card-context {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.flip-hint {
+    position: absolute;
+    bottom: 1rem;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+
+/* Grade Buttons */
+.grade-buttons {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.grade-buttons.hidden {
+    display: none;
+}
+
+.grade-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.grade-btn:hover {
+    transform: translateY(-2px);
+}
+
+.grade-btn.again {
+    border-color: #ef4444;
+}
+
+.grade-btn.again:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.grade-btn.hard {
+    border-color: #f59e0b;
+}
+
+.grade-btn.hard:hover {
+    background: rgba(245, 158, 11, 0.1);
+}
+
+.grade-btn.good {
+    border-color: #10b981;
+}
+
+.grade-btn.good:hover {
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.grade-btn.easy {
+    border-color: #3b82f6;
+}
+
+.grade-btn.easy:hover {
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.grade-emoji {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.grade-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* Loading */
+.loading {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.loading.hidden {
+    display: none;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border-color);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 0.5rem;
+}
+
+.nav-item {
+    flex: 1;
+    text-align: center;
+    padding: 0.75rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.nav-item:hover {
+    background: var(--bg-hover);
+}
+
+.nav-item.active {
+    color: var(--accent);
+    background: var(--bg-hover);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .flashcard {
+        height: 250px;
+    }
+
+    .card-term {
+        font-size: 1.5rem;
+    }
+
+    .grade-btn {
+        padding: 0.75rem 0.25rem;
+    }
+}

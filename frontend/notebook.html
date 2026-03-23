@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📓 Notebook - Language Teacher</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📓</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/notebook.css">
+</head>
+<body>
+    <div class="notebook-app">
+        <header class="notebook-header">
+            <div class="header-left">
+                <a href="/" class="back-btn">← Back</a>
+                <h1>📓 My Notebook</h1>
+            </div>
+            <div class="header-right">
+                <span id="item-count" class="item-count">0 items</span>
+                <button id="refresh-btn" class="btn btn-icon">🔄</button>
+            </div>
+        </header>
+
+        <div class="notebook-toolbar">
+            <div class="filter-group">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="vocabulary">📚 Vocabulary</button>
+                <button class="filter-btn" data-filter="grammar">📐 Grammar</button>
+                <button class="filter-btn" data-filter="error">❌ Errors</button>
+                <button class="filter-btn" data-filter="idiom">💬 Idioms</button>
+            </div>
+            <div class="search-group">
+                <input type="text" id="search-input" placeholder="Search..." class="search-input">
+            </div>
+        </div>
+
+        <main class="notebook-content">
+            <div id="items-grid" class="items-grid">
+                <!-- Items will be loaded here -->
+            </div>
+            <div id="empty-state" class="empty-state hidden">
+                <span class="empty-icon">📭</span>
+                <h2>No items yet</h2>
+                <p>Start a conversation with the teacher to learn new words!</p>
+                <a href="/" class="btn btn-primary">Start Learning</a>
+            </div>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading notebook...</p>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="/" class="nav-item">🎤 Chat</a>
+            <a href="/notebook.html" class="nav-item active">📓 Notebook</a>
+            <a href="/review.html" class="nav-item">🔄 Review</a>
+        </nav>
+    </div>
+
+    <script src="js/notebook.js"></script>
+</body>
+</html>

@@ -1,0 +1,575 @@
+/**
+ * Gemini Live - Responsive Styles
+ * Tablet and mobile breakpoints
+ */
+
+/* Hide mobile-only elements on desktop */
+.mobile-arrow {
+    display: none;
+}
+
+.mobile-overlay {
+    display: none;
+}
+
+.mobile-header {
+    display: none;
+}
+
+/* ============================================================
+   TABLET (601px - 900px) - iPad Portrait
+   ============================================================ */
+@media screen and (max-width: 900px) and (min-width: 601px) {
+    .app {
+        grid-template-columns: 140px 1fr 160px;
+    }
+
+    /* Arrow button at inner edge of sidebar */
+    .sidebar-hide-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 48px;
+        border-radius: 0 8px 8px 0;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border);
+        border-left: none;
+        color: var(--text2);
+        font-size: 11px;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .sidebar-hide-btn:active {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    .sidebar-left .sidebar-hide-btn {
+        right: -1px;
+        left: auto;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .sidebar-hide-right {
+        position: fixed;
+        right: 160px;
+        left: auto;
+        border-radius: 8px 0 0 8px;
+        border-left: 1px solid var(--border);
+        border-right: none;
+    }
+
+    .sidebar-left,
+    .sidebar-right {
+        padding: 10px;
+    }
+
+    .sidebar-header {
+        padding: 8px;
+        font-size: 11px;
+    }
+
+    .history-list {
+        padding: 4px;
+    }
+
+    .history-item {
+        padding: 6px;
+        font-size: 10px;
+    }
+
+    .logo {
+        font-size: 12px;
+        padding-bottom: 8px;
+    }
+
+    .settings-group label {
+        font-size: 8px;
+    }
+
+    .settings-group input,
+    .settings-group select {
+        padding: 6px;
+        font-size: 11px;
+    }
+
+    .status {
+        padding: 8px;
+        font-size: 10px;
+    }
+
+    /* Video section smaller */
+    .video-body {
+        max-height: 180px;
+    }
+
+    .video-header {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+
+    /* Chat controls - FIXED for tablet */
+    .chat-controls {
+        padding: 10px;
+        padding-bottom: 5px !important;
+    }
+
+    /* Hide screen share on tablet */
+    .mode-btn#btn-screen {
+        display: none;
+    }
+
+    .mode-buttons {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .mode-btn {
+        padding: 10px 6px;
+    }
+
+    .mode-btn .icon {
+        font-size: 20px;
+    }
+
+    .mode-btn span:last-child {
+        font-size: 9px;
+    }
+
+    /* RIGHT SIDEBAR - Prevent elements bursting out of the 160px column */
+    .sidebar-right {
+        overflow-x: hidden;
+    }
+
+    .language-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .teacher-mode-radios {
+        grid-template-columns: 1fr;
+    }
+
+    /* Long labels text wrapping */
+    .settings-group label {
+        white-space: normal;
+        line-height: 1.2;
+    }
+
+    .input-row input[type="text"] {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    .btn-attach,
+    .btn-send {
+        padding: 8px 12px;
+    }
+
+    .message-bubble {
+        max-width: 85%;
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .welcome h2 {
+        font-size: 20px;
+    }
+
+    .welcome p {
+        font-size: 12px;
+    }
+}
+
+/* ============================================================
+   MOBILE (<600px) - iPhone / Android
+   ============================================================ */
+@media screen and (max-width: 600px) {
+
+    /* Single column layout */
+    .app {
+        display: flex !important;
+        flex-direction: column !important;
+        grid-template-columns: unset !important;
+        height: 100vh;
+        height: 100dvh;
+    }
+
+    /* Main content fills screen */
+    .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    /* Arrow button at inner edge of open sidebar */
+    .sidebar-hide-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 52px;
+        border-radius: 0 8px 8px 0;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border);
+        border-left: none;
+        color: var(--text2);
+        font-size: 12px;
+        z-index: 1010;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .sidebar-hide-btn:active {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .sidebar-left .sidebar-hide-btn {
+        right: -1px;
+        left: auto;
+        border-radius: 0 8px 8px 0;
+    }
+
+    .sidebar-hide-right {
+        display: none;
+    }
+
+    .sidebar-left .sidebar-hide-btn {
+        display: none;
+    }
+
+    /* Sidebars are slide-out panels */
+    .sidebar-left,
+    .sidebar-right {
+        position: fixed !important;
+        top: 0 !important;
+        bottom: 0 !important;
+        width: 85% !important;
+        max-width: 320px !important;
+        z-index: 1000 !important;
+        background: var(--bg2) !important;
+        padding: 14px !important;
+        transition: transform 0.3s ease !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+
+    /* Unified select styling on mobile */
+    .sidebar-right select {
+        font-size: 13px;
+        padding: 8px 30px 8px 10px;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 5l3 3 3-3' fill='none' stroke='%23888' stroke-width='1.5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        background-size: 12px;
+    }
+
+    .language-row {
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    .language-row-item {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .language-row-item label {
+        font-size: 10px;
+    }
+
+    .language-row-item .language-picker-btn {
+        padding: 6px 8px;
+        font-size: 12px;
+    }
+
+    .teacher-mode-radios {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+    }
+
+    .teacher-mode-group label[data-i18n] {
+        font-size: 11px;
+    }
+
+    .radio-label span:last-child {
+        font-size: 11px;
+    }
+
+    /* Compact sidebar right on mobile */
+    .sidebar-right .settings-group {
+        margin-bottom: 6px;
+        padding-bottom: 6px;
+    }
+
+    .sidebar-right .settings-group label {
+        font-size: 10px;
+        margin-bottom: 3px;
+    }
+
+    .sidebar-right .logo {
+        font-size: 14px;
+        padding-bottom: 6px;
+    }
+
+    /* Progress collapsed by default, compact */
+    .progress-section .progress-widget {
+        max-height: 200px;
+        overflow-y: auto;
+    }
+
+    .progress-actions-row {
+        gap: 4px;
+    }
+
+    .progress-actions-row .btn {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+
+    .sidebar-left {
+        left: 0 !important;
+        right: auto !important;
+        transform: translateX(-100%);
+        border-right: 1px solid var(--border);
+    }
+
+    .sidebar-right {
+        right: 0 !important;
+        left: auto !important;
+        transform: translateX(100%);
+        border-left: 1px solid var(--border);
+    }
+
+    .sidebar-left.mobile-open {
+        transform: translateX(0) !important;
+    }
+
+    .sidebar-right.mobile-open {
+        transform: translateX(0) !important;
+    }
+
+    /* Mobile arrow triggers */
+    .mobile-arrow {
+        display: flex !important;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 22px;
+        height: 44px;
+        background: var(--bg3);
+        border: 1px solid var(--border);
+        color: var(--text2);
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 11px;
+    }
+
+    .mobile-arrow-left {
+        left: 0;
+        border-radius: 0 6px 6px 0;
+        border-left: none;
+    }
+
+    .mobile-arrow-right {
+        right: 0;
+        border-radius: 6px 0 0 6px;
+        border-right: none;
+    }
+
+    .mobile-arrow:active {
+        background: var(--bg4);
+    }
+
+    /* Overlay */
+    .mobile-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+    }
+
+    .mobile-overlay.active {
+        display: block !important;
+    }
+
+    /* Video section as floating compact preview on mobile */
+    .video-section {
+        position: fixed !important;
+        bottom: 160px;
+        right: 10px;
+        width: 140px;
+        z-index: 900;
+        border-radius: var(--radius-md);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-section .video-header {
+        padding: 4px 8px;
+        font-size: 10px;
+    }
+
+    .video-section .video-body {
+        max-height: 100px;
+    }
+
+    .video-section .video-body.minimized {
+        max-height: 0;
+    }
+
+    /* Chat fills space */
+    .chat-section {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-messages {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+    }
+
+    /* Welcome centered */
+    .welcome {
+        text-align: center !important;
+        padding: 30px 16px !important;
+    }
+
+    .welcome h2 {
+        font-size: 22px;
+    }
+
+    .welcome p {
+        font-size: 12px;
+        color: var(--text3);
+    }
+
+    /* Chat controls - MINIMAL PADDING */
+    .chat-controls {
+        padding: 8px 10px !important;
+        padding-bottom: 15px !important;
+    }
+
+    .input-row {
+        margin-bottom: 8px;
+    }
+
+    .input-row input[type="text"] {
+        padding: 10px 12px;
+        font-size: 16px;
+        /* Prevents iOS zoom */
+        border-radius: var(--radius-md);
+    }
+
+    .btn-attach,
+    .btn-send {
+        padding: 10px 12px;
+        border-radius: var(--radius-md);
+    }
+
+    /* Hide screen share on mobile */
+    .mode-btn#btn-screen {
+        display: none !important;
+    }
+
+    .mode-buttons {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 6px;
+    }
+
+    .mode-btn {
+        padding: 10px 6px;
+        border-radius: var(--radius-md);
+    }
+
+    .mode-btn .icon {
+        font-size: 20px;
+    }
+
+    .mode-btn span:last-child {
+        font-size: 9px;
+    }
+
+    .message-bubble {
+        max-width: 88%;
+        font-size: 13px;
+        padding: 8px 10px;
+        border-radius: var(--radius-md);
+    }
+}
+
+/* ============================================================
+   SMALL MOBILE (<400px) - iPhone SE
+   ============================================================ */
+@media screen and (max-width: 400px) {
+
+    .sidebar-left,
+    .sidebar-right {
+        width: 92% !important;
+    }
+
+    .mode-btn {
+        padding: 8px 4px;
+    }
+
+    .mode-btn .icon {
+        font-size: 18px;
+    }
+
+    .mode-btn span:last-child {
+        font-size: 8px;
+    }
+
+    .welcome h2 {
+        font-size: 20px;
+    }
+
+    .chat-controls {
+        padding-bottom: 12px !important;
+    }
+}
+
+/* ============================================================
+   CAMERA TOGGLE
+   ============================================================ */
+.camera-toggle {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 10;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.camera-toggle:hover {
+    background: rgba(0, 0, 0, 0.8);
+}

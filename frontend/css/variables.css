@@ -1,0 +1,223 @@
+/**
+ * Gemini Live - CSS Variables & Theme
+ * Color palette and theming system
+ */
+
+/* ========== DARK THEME (Default) ========== */
+:root {
+    --bg1: #0a0a0f;
+    --bg2: #12121a;
+    --bg3: #1a1a26;
+    --bg4: #242434;
+    --accent: #6366f1;
+    --accent-hover: #818cf8;
+    --green: #22c55e;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    --text: #f4f4f5;
+    --text2: #a1a1aa;
+    --text3: #71717a;
+    --border: #2a2a3a;
+    --shadow: rgba(0, 0, 0, 0.4);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+}
+
+/* ========== LIGHT THEME ========== */
+:root.light {
+    --bg1: #ffffff;
+    --bg2: #f8f9fa;
+    --bg3: #e9ecef;
+    --bg4: #dee2e6;
+    --accent: #4f46e5;
+    --accent-hover: #6366f1;
+    --green: #16a34a;
+    --red: #dc2626;
+    --cyan: #0891b2;
+    --text: #1f2937;
+    --text2: #4b5563;
+    --text3: #6b7280;
+    --border: #d1d5db;
+    --shadow: rgba(0, 0, 0, 0.15);
+}
+
+/* Explicit dark theme class */
+:root.dark {
+    --bg1: #0a0a0f;
+    --bg2: #12121a;
+    --bg3: #1a1a26;
+    --bg4: #242434;
+    --accent: #6366f1;
+    --green: #22c55e;
+    --red: #ef4444;
+    --cyan: #06b6d4;
+    --text: #f4f4f5;
+    --text2: #a1a1aa;
+    --text3: #71717a;
+    --border: #2a2a3a;
+}
+
+/* ========== TWILIGHT THEME (Middle) ========== */
+:root.twilight {
+    --bg1: #1a1f2e;
+    --bg2: #252b3d;
+    --bg3: #2f374a;
+    --bg4: #3a4358;
+    --accent: #7c7ff1;
+    --accent-hover: #9498f8;
+    --green: #34d399;
+    --red: #f87171;
+    --cyan: #22d3ee;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --border: #475569;
+    --shadow: rgba(0, 0, 0, 0.35);
+}
+
+/* ========== WARM THEME (Cozy Amber) ========== */
+:root.warm {
+    --bg1: #1c1410;
+    --bg2: #261c16;
+    --bg3: #332620;
+    --bg4: #41322a;
+    --accent: #e8915a;
+    --accent-hover: #f0a978;
+    --green: #6cc070;
+    --red: #e85d5d;
+    --cyan: #68b5c4;
+    --text: #f5ede6;
+    --text2: #c4a98e;
+    --text3: #8f7560;
+    --border: #4a3628;
+    --shadow: rgba(20, 10, 0, 0.45);
+}
+
+/* ========== OCEAN THEME (Deep Sea) ========== */
+:root.ocean {
+    --bg1: #0a1520;
+    --bg2: #0f1e2e;
+    --bg3: #162a3e;
+    --bg4: #1f374f;
+    --accent: #38bdf8;
+    --accent-hover: #5fcbfa;
+    --green: #2dd4bf;
+    --red: #fb7185;
+    --cyan: #22d3ee;
+    --text: #e8f4ff;
+    --text2: #7eb8db;
+    --text3: #4d8aac;
+    --border: #1e3a52;
+    --shadow: rgba(0, 10, 25, 0.5);
+}
+
+/* ========== FOREST THEME (Deep Green) ========== */
+:root.forest {
+    --bg1: #0c1a0e;
+    --bg2: #142318;
+    --bg3: #1c2e20;
+    --bg4: #263b2a;
+    --accent: #4ade80;
+    --accent-hover: #6ee7a0;
+    --green: #34d399;
+    --red: #f87171;
+    --cyan: #5eead4;
+    --text: #ecfdf5;
+    --text2: #86efac;
+    --text3: #4aba7a;
+    --border: #1e4028;
+    --shadow: rgba(0, 15, 5, 0.5);
+}
+
+/* ========== SAKURA THEME (Pink/Purple) ========== */
+:root.sakura {
+    --bg1: #1a0f1e;
+    --bg2: #251828;
+    --bg3: #312134;
+    --bg4: #3f2c42;
+    --accent: #e879a8;
+    --accent-hover: #f0a0c0;
+    --green: #86efac;
+    --red: #fb7185;
+    --cyan: #c084fc;
+    --text: #fdf2f8;
+    --text2: #d4a0c0;
+    --text3: #9a6b88;
+    --border: #4a2840;
+    --shadow: rgba(20, 0, 15, 0.5);
+}
+
+/* ========== THEME BACKGROUNDS ========== */
+body.themed-bg::before {
+    content: '';
+    position: fixed;
+    inset: -20px;
+    z-index: -1;
+    opacity: 0.4;
+    pointer-events: none;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(8px);
+    animation: bgPan 60s ease-in-out infinite alternate;
+    will-change: transform;
+}
+
+@keyframes bgPan {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+
+    100% {
+        transform: scale(1.1) translate(-1%, -1%);
+    }
+}
+
+/* Forest: real image */
+body.themed-bg[data-theme="forest"]::before {
+    background-image: url('../images/bg_forest.png');
+    opacity: 0.25;
+}
+
+/* Sakura: real image */
+body.themed-bg[data-theme="sakura"]::before {
+    background-image: url('../images/bg_sakura.png');
+    opacity: 0.35;
+}
+
+/* Warm: real image */
+body.themed-bg[data-theme="warm"]::before {
+    background-image: url('../images/bg_warm.png');
+    opacity: 0.4;
+}
+
+/* Twilight: real image */
+body.themed-bg[data-theme="twilight"]::before {
+    background-image: url('../images/bg_twilight.png');
+    opacity: 0.35;
+}
+
+/* Ocean: real image */
+body.themed-bg[data-theme="ocean"]::before {
+    background-image: url('../images/bg_ocean.png');
+    opacity: 0.35;
+}
+
+/* Dark: moon and stars */
+body.themed-bg[data-theme="dark"]::before {
+    background-image: url('../images/bg_dark.png');
+    opacity: 0.35;
+}
+
+/* Light: sunshine and cottage */
+body.themed-bg[data-theme="light"]::before {
+    background-image: url('../images/bg_light.png');
+    opacity: 0.6;
+    filter: blur(4px);
+}
+
+/* Light: body must be transparent so ::before bg image shows through */
+body.themed-bg[data-theme="light"] {
+    background: #f0f0f5 !important;
+}

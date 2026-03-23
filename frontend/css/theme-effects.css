@@ -1,0 +1,269 @@
+/**
+ * Theme Effects — CSS Animations
+ * Particles, glowing orbs, light shafts, sunbursts, fireflies
+ * All behind content (z-index: -1)
+ */
+
+/* ========== CONTAINER ========== */
+#theme-effects-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* ========== EMOJI PARTICLES ========== */
+.theme-particle {
+    position: absolute;
+    user-select: none;
+    pointer-events: none;
+    will-change: transform, opacity;
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.12));
+}
+
+/* Falling (forest, sakura, twilight) */
+.particle-fall {
+    animation: particleFall var(--duration, 20s) linear var(--delay, 0s) infinite;
+}
+
+@keyframes particleFall {
+    0% {
+        transform: translateY(-20px) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: translateY(50vh) translateX(var(--drift, 20px)) rotate(180deg);
+    }
+
+    95% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(105vh) translateX(calc(var(--drift, 20px) * 2)) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Rising (ocean) */
+.particle-rise {
+    animation: particleRise var(--duration, 20s) linear var(--delay, 0s) infinite;
+}
+
+@keyframes particleRise {
+    0% {
+        transform: translateY(20px) translateX(0) scale(0.6);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-50vh) translateX(var(--drift, 10px)) scale(0.9);
+    }
+
+    95% {
+        opacity: 0.25;
+    }
+
+    100% {
+        transform: translateY(-105vh) translateX(calc(var(--drift, 10px) * 1.5)) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* Floating (warm, dark, light) */
+.particle-float {
+    animation: particleFloat var(--duration, 20s) ease-in-out var(--delay, 0s) infinite;
+}
+
+@keyframes particleFloat {
+
+    0%,
+    100% {
+        transform: translateX(0) translateY(0) scale(1);
+        opacity: 0.3;
+    }
+
+    25% {
+        transform: translateX(var(--drift, 15px)) translateY(-14px) scale(1.1);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateX(calc(var(--drift, 15px) * 0.5)) translateY(10px) scale(0.95);
+        opacity: 0.35;
+    }
+
+    75% {
+        transform: translateX(calc(var(--drift, 15px) * -0.3)) translateY(-8px) scale(1.05);
+        opacity: 0.45;
+    }
+}
+
+/* ========== GLOWING ORBS ========== */
+.theme-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(50px);
+    animation: orbDrift var(--orb-duration, 25s) ease-in-out infinite;
+    will-change: transform, opacity;
+}
+
+@keyframes orbDrift {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+    }
+
+    25% {
+        transform: translate(var(--orb-drift-x, 40px), var(--orb-drift-y, -25px)) scale(1.2);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(calc(var(--orb-drift-x, 40px) * -0.6), calc(var(--orb-drift-y, -25px) * 0.8)) scale(0.85);
+        opacity: 0.55;
+    }
+
+    75% {
+        transform: translate(calc(var(--orb-drift-x, 40px) * 0.4), calc(var(--orb-drift-y, -25px) * -0.5)) scale(1.12);
+        opacity: 0.7;
+    }
+}
+
+/* ========== LIGHT SHAFTS ========== */
+.theme-shaft {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transform: skewX(-5deg);
+    animation: shaftGlow var(--shaft-duration, 12s) ease-in-out var(--shaft-delay, 0s) infinite;
+    will-change: opacity;
+}
+
+@keyframes shaftGlow {
+
+    0%,
+    100% {
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.5;
+    }
+
+    40% {
+        opacity: 0.85;
+    }
+
+    60% {
+        opacity: 0.7;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+}
+
+/* ========== SUNBURST ========== */
+.theme-sunburst {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    transform: translate(-50%, -50%);
+    animation: sunburstPulse 10s ease-in-out infinite;
+    will-change: opacity, transform;
+}
+
+@keyframes sunburstPulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+        opacity: 0.85;
+        transform: translate(-50%, -50%) scale(1.15);
+    }
+}
+
+/* ========== FIREFLIES ========== */
+.theme-firefly {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: var(--firefly-color, rgba(200, 255, 100, 0.7));
+    box-shadow: 0 0 8px 3px var(--firefly-color, rgba(200, 255, 100, 0.5)),
+        0 0 18px 6px var(--firefly-color, rgba(200, 255, 100, 0.15));
+    animation: fireflyGlow var(--glow-duration, 4s) ease-in-out infinite,
+        fireflyDrift 7s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.theme-firefly.firefly-static {
+    animation: fireflyGlow var(--glow-duration, 3) ease-in-out infinite;
+}
+
+@keyframes fireflyGlow {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.3);
+    }
+
+    25% {
+        opacity: 0.2;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 0.2;
+        transform: scale(0.75);
+    }
+
+    75% {
+        opacity: 0.65;
+        transform: scale(0.4);
+    }
+}
+
+@keyframes fireflyDrift {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(var(--drift-x, 20px), var(--drift-y, -15px));
+    }
+
+    50% {
+        transform: translate(calc(var(--drift-x, 20px) * -0.5), calc(var(--drift-y, -15px) * 0.7));
+    }
+
+    75% {
+        transform: translate(calc(var(--drift-x, 20px) * 0.3), calc(var(--drift-y, -15px) * -0.5));
+    }
+}

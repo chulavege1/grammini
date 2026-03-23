@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔄 SRS Review - Language Teacher</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/review.css">
+</head>
+
+<body>
+    <div class="review-app">
+        <header class="review-header">
+            <a href="/" class="back-btn">← Back</a>
+            <h1>🔄 Review</h1>
+            <div class="progress-info">
+                <span id="cards-remaining">0</span> cards left
+            </div>
+        </header>
+
+        <main class="review-content">
+            <!-- No cards state -->
+            <div id="no-cards" class="no-cards hidden">
+                <span class="empty-icon">🎉</span>
+                <h2>All done!</h2>
+                <p>No cards due for review. Check back later!</p>
+                <a href="/" class="btn btn-primary">Continue Learning</a>
+            </div>
+
+            <!-- Flashcard -->
+            <div id="flashcard-container" class="flashcard-container hidden">
+                <div id="flashcard" class="flashcard">
+                    <div class="flashcard-inner">
+                        <div class="flashcard-front">
+                            <span class="category-badge" id="card-category"></span>
+                            <div class="card-term" id="card-term"></div>
+                            <div class="card-context" id="card-context"></div>
+                            <p class="flip-hint">Tap to reveal answer</p>
+                        </div>
+                        <div class="flashcard-back">
+                            <span class="category-badge" id="card-category-back"></span>
+                            <div class="card-term" id="card-term-back"></div>
+                            <div class="card-definition" id="card-definition"></div>
+                            <div class="card-context" id="card-context-back"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="grade-buttons" class="grade-buttons hidden">
+                    <button class="grade-btn again" data-grade="again">
+                        <span class="grade-emoji">😰</span>
+                        <span class="grade-label">Again</span>
+                    </button>
+                    <button class="grade-btn hard" data-grade="hard">
+                        <span class="grade-emoji">😅</span>
+                        <span class="grade-label">Hard</span>
+                    </button>
+                    <button class="grade-btn good" data-grade="good">
+                        <span class="grade-emoji">🙂</span>
+                        <span class="grade-label">Good</span>
+                    </button>
+                    <button class="grade-btn easy" data-grade="easy">
+                        <span class="grade-emoji">😎</span>
+                        <span class="grade-label">Easy</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Loading cards...</p>
+            </div>
+        </main>
+
+        <nav class="bottom-nav">
+            <a href="/" class="nav-item">🎤 Chat</a>
+            <a href="/notebook.html" class="nav-item">📓 Notebook</a>
+            <a href="/review.html" class="nav-item active">🔄 Review</a>
+        </nav>
+    </div>
+
+    <script src="js/review.js"></script>
+</body>
+
+</html>

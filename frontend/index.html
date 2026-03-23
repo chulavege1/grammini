@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gemini Live</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Modular CSS -->
+    <link rel="stylesheet" href="css/variables.css?v=11">
+    <link rel="stylesheet" href="css/main.css?v=11">
+    <link rel="stylesheet" href="css/layout.css?v=11">
+    <link rel="stylesheet" href="css/components.css?v=11">
+    <link rel="stylesheet" href="css/modal.css?v=11">
+    <link rel="stylesheet" href="css/responsive.css?v=11">
+    <link rel="stylesheet" href="css/theme-effects.css?v=11">
+    <link rel="stylesheet" href="css/tutorial.css?v=11">
+</head>
+
+<body>
+    <div class="app">
+        <!-- Left: History -->
+        <aside class="sidebar-left" id="sidebar-left">
+            <div class="sidebar-header">
+                <span><img src="images/logo.png" alt="" class="sidebar-logo-icon"> Chats</span>
+                <button id="new-chat-btn" class="btn-icon" title="New Chat">+</button>
+            </div>
+            <div id="history-list" class="history-list"></div>
+            <!-- Hide button at inner edge -->
+            <button class="sidebar-hide-btn" id="hide-left-btn" title="Hide chats">◀</button>
+        </aside>
+
+        <!-- Center: Main -->
+        <main class="main-content">
+            <!-- Mobile Arrow Buttons (for slideout sidebars) -->
+            <button class="mobile-arrow mobile-arrow-left" onclick="openMobileSidebar('left')">▶</button>
+            <button class="mobile-arrow mobile-arrow-right" onclick="openMobileSidebar('right')">◀</button>
+            <div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileSidebars()"></div>
+
+            <!-- Video (draggable, minimizable, fullscreen) - hidden by default -->
+            <div class="video-section draggable video-hidden" id="video-section">
+                <div class="video-header drag-handle">
+                    <span>📺 Video</span>
+                    <div class="video-controls">
+                        <button id="video-fullscreen" class="btn-icon" title="Fullscreen">⛶</button>
+                        <button id="toggle-video" class="btn-icon" title="Minimize">−</button>
+                        <button id="hide-video" class="btn-icon" title="Hide">✕</button>
+                    </div>
+                </div>
+                <div class="video-body" id="video-body">
+                    <video id="video-preview" autoplay muted playsinline></video>
+                    <button id="camera-toggle" class="camera-toggle" style="display:none;">🔄</button>
+                    <div id="video-placeholder" class="video-placeholder">
+                        <span>🖥️</span>
+                        <p>Select mode to start</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating button to restore hidden video panel -->
+            <button id="show-video-btn" class="show-video-btn hidden" title="Show video">📺</button>
+
+            <!-- Chat -->
+            <div class="chat-section">
+                <div id="chat-messages" class="chat-messages">
+                    <div class="welcome">
+                        <h2>Gemini Live</h2>
+                        <p>Voice & Vision AI</p>
+                    </div>
+                </div>
+                <!-- Floating draggable widget - OUTSIDE chat-messages to survive clearing! -->
+                <div class="floating-widget" id="floating-widget">
+                    <div class="widget-drag-handle" id="widget-drag-handle">⋮⋮</div>
+
+                    <!-- Column 1: Scroll follow toggle -->
+                    <div class="widget-column widget-lang-col" style="flex-direction: row; gap: 6px;">
+                        <button id="scroll-follow-btn" class="widget-mute-btn widget-scroll-btn"
+                            title="Следовать за подсветкой (вкл/выкл)">📜</button>
+                    </div>
+
+                    <!-- Column 2: Sliders with mute buttons at ends -->
+                    <div class="widget-column widget-controls-col">
+                        <!-- Volume slider + speaker button -->
+                        <div class="widget-slider-row">
+                            <input type="range" id="volume-slider" class="widget-slider" min="0" max="100" value="100">
+                            <button id="mute-voice-btn" class="widget-mute-btn widget-speaker-btn"
+                                title="Заглушить голос бота">🔊</button>
+                        </div>
+                        <!-- Mic level bar + mic button -->
+                        <div class="widget-slider-row">
+                            <div class="mic-level-bar-container">
+                                <div class="mic-level-bar" id="mic-level-bar"></div>
+                            </div>
+                            <button id="mute-mic-btn" class="widget-mute-btn widget-mic-btn"
+                                title="Заглушить микрофон">🎙️</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-controls">
+                    <div class="input-row">
+                        <input type="file" id="file-input" accept="image/*,audio/*,.pdf,.txt,.md" multiple hidden>
+                        <button id="attach-btn" class="btn btn-attach" title="Attach file">📎</button>
+                        <input type="text" id="text-input" placeholder="Type a message...">
+                        <button id="send-btn" class="btn btn-send">→</button>
+                    </div>
+
+                    <div id="attachments-preview" class="attachments-preview hidden"></div>
+
+                    <div id="mode-buttons" class="mode-buttons">
+                        <button id="btn-voice" class="mode-btn">
+                            <span class="icon">🎤</span>
+                            <span>Voice</span>
+                        </button>
+                        <button id="btn-screen" class="mode-btn">
+                            <span class="icon">🖥️</span>
+                            <span>Screen</span>
+                        </button>
+                        <button id="btn-camera" class="mode-btn">
+                            <span class="icon">📷</span>
+                            <span>Camera</span>
+                        </button>
+                    </div>
+
+                    <!-- Stop + Skip row: 50/50 split -->
+                    <div id="stop-row" class="stop-row hidden">
+                        <button id="skip-speech-btn" class="btn btn-skip">⏭️ Skip</button>
+                        <button id="stop-btn" class="btn btn-stop">⏹ Stop</button>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Right: Settings -->
+        <aside class="sidebar-right" id="sidebar-right">
+            <div class="logo">Gemini Live</div>
+
+            <div class="settings-group">
+                <label data-i18n="apikey">🔑 API KEY <button id="add-key-btn" class="btn-add-key"
+                        title="Добавить ключ">+</button></label>
+                <input type="password" id="api-key" placeholder="Основной ключ Gemini">
+                <a href="https://aistudio.google.com/app/apikey" target="_blank" class="link">Get key →</a>
+                <div id="extra-keys-list"></div>
+            </div>
+
+            <div class="settings-group">
+                <label data-i18n="voice">🎙️ Voice</label>
+                <select id="voice-select">
+                    <option value="Puck">🧑 Puck (Male)</option>
+                    <option value="Charon">🧔 Charon (Male)</option>
+                    <option value="Kore">👩 Kore (Female)</option>
+                    <option value="Fenrir">🐺 Fenrir (Male)</option>
+                    <option value="Aoede">🎵 Aoede (Female)</option>
+                    <option value="Leda">👱‍♀️ Leda (Female)</option>
+                    <option value="Orus">🗣️ Orus (Male)</option>
+                    <option value="Zephyr">🌬️ Zephyr (Male)</option>
+                    <option value="Perseus">⚔️ Perseus (Male)</option>
+                    <option value="Altair">⭐ Altair (Male)</option>
+                    <option value="Gacrux">💎 Gacrux (Female)</option>
+                    <option value="Sulafat">🌙 Sulafat (Female)</option>
+                    <option value="Umbriel">🌑 Umbriel (Male)</option>
+                    <option value="Algieba">🦁 Algieba (Male)</option>
+                </select>
+            </div>
+
+            <div class="settings-group">
+                <label data-i18n="speechRate">🎚️ Скорость речи</label>
+                <div class="speech-rate-controls" style="display: flex; align-items: center; gap: 10px;">
+                    <input type="range" id="speech-rate" min="0.50" max="2.00" step="0.01" value="1.00"
+                        style="flex: 1;">
+                    <input type="text" id="speech-rate-input" value="1.00" maxlength="4" placeholder="1.00" style="width: 55px; padding: 4px 6px; border-radius: 6px; border: 1px solid #3a3a4a; 
+                                  background: #1a1a24; color: #fff; font-size: 14px; text-align: center;">
+                </div>
+            </div>
+
+            <!-- Language Settings - Study + Translation in one row -->
+            <div class="language-row">
+                <div class="language-row-item">
+                    <label data-i18n="studying">📚 Изучаю</label>
+                    <div class="language-picker" id="language-picker">
+                        <button class="language-picker-btn" id="language-picker-btn" type="button">
+                            <span class="lang-flag">🇩🇪</span>
+                            <span class="lang-name">Deutsch</span>
+                            <span class="lang-arrow">▾</span>
+                        </button>
+                        <div class="language-picker-dropdown" id="language-picker-dropdown">
+                            <input type="text" class="language-search" id="language-search"
+                                placeholder="🔍 Search language..." autocomplete="off">
+                            <div class="language-list" id="language-list"></div>
+                        </div>
+                        <input type="hidden" id="target-language" value="German">
+                    </div>
+                </div>
+                <div class="language-row-item">
+                    <label data-i18n="translate">🗣️ Перевод</label>
+                    <div class="language-picker" id="native-language-picker">
+                        <button class="language-picker-btn" id="native-language-picker-btn" type="button">
+                            <span class="lang-flag" id="native-lang-flag">🇷🇺</span>
+                            <span class="lang-name" id="native-lang-name">Рус</span>
+                            <span class="lang-arrow">▾</span>
+                        </button>
+                        <div class="language-picker-dropdown" id="native-language-picker-dropdown">
+                            <input type="text" class="language-search" id="native-language-search"
+                                placeholder="🔍 Search..." autocomplete="off">
+                            <div class="language-list" id="native-language-list"></div>
+                        </div>
+                        <input type="hidden" id="native-language" value="Russian">
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-group">
+                <label data-i18n="level">📊 Уровень</label>
+                <select id="language-level">
+                    <option value="A1">A1 - Beginner</option>
+                    <option value="A2" selected>A2 - Elementary</option>
+                    <option value="B1">B1 - Intermediate</option>
+                    <option value="B2">B2 - Upper-Intermediate</option>
+                    <option value="C1">C1 - Advanced</option>
+                    <option value="C2">C2 - Proficient</option>
+                </select>
+            </div>
+
+            <div class="settings-group teacher-mode-group">
+                <label data-i18n="trainerMode">🎓 Режим тренера</label>
+                <div class="teacher-mode-radios">
+                    <label class="radio-label">
+                        <input type="radio" name="teacher-mode" value="standard" checked>
+                        <span class="radio-marker"></span>
+                        <span>📖 Стандарт</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="teacher-mode" value="active">
+                        <span class="radio-marker"></span>
+                        <span>🚀 Активный</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="teacher-mode" value="grammar">
+                        <span class="radio-marker"></span>
+                        <span>📚 Грамматика</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="teacher-mode" value="free_conversation">
+                        <span class="radio-marker"></span>
+                        <span>💬 Разговор</span>
+                    </label>
+
+                </div>
+            </div>
+
+            <!-- Delivery Mode: 3 options -->
+            <div class="settings-group delivery-mode-group">
+                <label data-i18n="deliveryMode">📦 Режим доставки</label>
+                <div class="delivery-mode-radios">
+                    <label class="radio-label">
+                        <input type="radio" name="delivery-mode" value="interactive" checked>
+                        <span class="radio-marker"></span>
+                        <span>🎯 По 1</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="delivery-mode" value="fast_text">
+                        <span class="radio-marker"></span>
+                        <span>⚡ Быстрый</span>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="delivery-mode" value="auto_10">
+                        <span class="radio-marker"></span>
+                        <span>🔄 Авто 10</span>
+                    </label>
+                </div>
+                <span class="toggle-hint" id="delivery-mode-hint">Интерактивный диалог</span>
+            </div>
+
+
+            <!-- A1S Training Mode removed per user request -->
+
+            <!-- Compact Progress Row -->
+            <div class="settings-group progress-section">
+                <label data-i18n="myProgress">📈 Мой прогресс</label>
+                <div id="progress-widget" class="progress-widget">
+                    <div class="progress-loading">Загрузка...</div>
+                </div>
+                <div class="progress-actions-row">
+                    <button id="open-saves-modal-btn" class="btn btn-secondary btn-sm"
+                        title="Сохранения и управление">💾 Управление</button>
+                    <button id="export-words-btn" class="btn btn-secondary btn-sm">📥 Экспорт</button>
+                </div>
+            </div>
+
+
+            <div class="settings-group theme-group">
+                <div class="theme-label-row">
+                    <label data-i18n="theme">🎨 Theme</label>
+                    <label class="bg-toggle-inline" title="Фоновое изображение">
+                        <input type="checkbox" id="theme-bg-toggle">
+                        <span data-i18n="background">🖼️ Фон</span>
+                    </label>
+                </div>
+                <select id="theme-select">
+                    <option value="dark">🌙 Dark</option>
+                    <option value="twilight">🌆 Twilight</option>
+                    <option value="warm">🔥 Warm</option>
+                    <option value="ocean">🌊 Ocean</option>
+                    <option value="forest">🌲 Forest</option>
+                    <option value="sakura">🌸 Sakura</option>
+                    <option value="light">☀️ Light</option>
+                    <option value="system">💻 System</option>
+                </select>
+            </div>
+
+
+
+
+            <!-- Hide button at inner edge -->
+            <button class="sidebar-hide-btn sidebar-hide-right" id="hide-right-btn" title="Hide settings">▶</button>
+        </aside>
+    </div>
+
+    <!-- Save Management Modal -->
+    <div id="saves-modal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content saves-modal-content">
+            <div class="modal-header">
+                <h3>💾 Управление прогрессом</h3>
+                <button id="close-saves-modal" class="btn-icon">✕</button>
+            </div>
+            <div class="modal-body">
+                <div id="current-save-info" class="current-save-info">
+                    <span class="current-save-label">📍 Текущее:</span>
+                    <span id="current-save-name" class="current-save-name">Не загружено</span>
+                </div>
+                <div class="saves-modal-actions">
+                    <button id="create-save-btn" class="btn btn-secondary btn-sm">💾 Сохранить</button>
+                    <button id="reset-progress-btn" class="btn btn-danger btn-sm">🗑️ Начать заново</button>
+                </div>
+                <div class="saves-modal-list">
+                    <label>📂 Сохранения</label>
+                    <div id="save-slots-list" class="save-slots-list">
+                        <p class="saves-empty">Нет сохранений</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Context Menu for chats -->
+    <div id="context-menu" class="context-menu hidden">
+        <button id="ctx-rename">✏️ Rename</button>
+        <button id="ctx-delete" class="delete-btn">🗑️ Delete</button>
+    </div>
+
+
+
+    <!-- Mobile Popup Overlays -->
+    <div id="popup-overlay-history" class="mobile-popup-overlay" onclick="hideMobilePopup('history')">
+        <div class="mobile-popup" onclick="event.stopPropagation()">
+            <div class="mobile-popup-header">
+                <h3>💬 Chats</h3>
+                <button class="mobile-popup-close" onclick="hideMobilePopup('history')">✕</button>
+            </div>
+            <div class="mobile-popup-body" id="mobile-history-list"></div>
+        </div>
+    </div>
+
+    <div id="popup-overlay-settings" class="mobile-popup-overlay" onclick="hideMobilePopup('settings')">
+        <div class="mobile-popup" onclick="event.stopPropagation()">
+            <div class="mobile-popup-header">
+                <h3>⚙️ Settings</h3>
+                <button class="mobile-popup-close" onclick="hideMobilePopup('settings')">✕</button>
+            </div>
+            <div class="mobile-popup-body" id="mobile-settings-content"></div>
+        </div>
+    </div>
+
+    <!-- TypeScript Application Bundle (replaces all JS files) -->
+    <script src="dist/bundle.js?v=37"></script>
+
+</body>
+
+</html>

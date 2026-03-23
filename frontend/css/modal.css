@@ -1,0 +1,311 @@
+/**
+ * Gemini Live - Modals & Overlays
+ * System instructions modal, context menu, popups
+ */
+
+/* ========== MODAL ========== */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    position: relative;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    width: 90%;
+    max-width: 450px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 16px 32px var(--shadow);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-input {
+    padding: 10px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 13px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.modal-input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.modal-hint {
+    font-size: 11px;
+    color: var(--text3);
+}
+
+.modal-footer {
+    padding: 14px 16px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.instruction-preset {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.instruction-preset:hover {
+    background: var(--bg4);
+}
+
+.dropdown-arrow {
+    color: var(--text3);
+}
+
+/* ========== CONTEXT MENU ========== */
+.context-menu {
+    position: fixed;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 6px;
+    z-index: 9999;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    min-width: 120px;
+}
+
+.context-menu.hidden {
+    display: none !important;
+}
+
+.context-menu button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    background: none;
+    border: none;
+    color: var(--text);
+    font-size: 13px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    transition: background 0.15s;
+}
+
+.context-menu button:hover {
+    background: var(--bg4);
+}
+
+.context-menu button.delete-btn {
+    color: #ff6b6b;
+}
+
+.context-menu button.delete-btn:hover {
+    background: rgba(255, 107, 107, 0.15);
+}
+
+/* ========== RENAME MODAL ========== */
+.rename-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rename-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.rename-modal-content {
+    position: relative;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    width: 90%;
+    max-width: 320px;
+    text-align: center;
+}
+
+.rename-modal-content h3 {
+    margin: 0 0 14px 0;
+    font-size: 16px;
+}
+
+.rename-modal-content input {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+.rename-modal-content input:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.rename-modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.rename-modal-buttons button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.rename-modal-buttons .btn-cancel {
+    background: var(--bg3);
+    color: var(--text);
+}
+
+.rename-modal-buttons .btn-save {
+    background: var(--accent);
+    color: white;
+}
+
+/* ========== SIDEBAR TOGGLE BUTTONS ========== */
+.show-sidebar-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    z-index: 100;
+    font-size: 12px;
+    transition: background 0.2s;
+}
+
+.show-sidebar-btn:hover {
+    background: var(--accent);
+}
+
+.show-sidebar-btn.left {
+    left: 0;
+}
+
+.show-sidebar-btn.right {
+    right: 0;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+}
+
+/* Ensure right panel toggle stays above sidebar content */
+.app.right-collapsed .show-sidebar-btn.right {
+    z-index: 101;
+}
+
+/* ========== HIDE SIDEBAR BUTTONS (inside sidebars at inner edges) ========== */
+.sidebar-hide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    width: 20px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 50;
+    font-size: 10px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-hide-btn:hover {
+    background: var(--bg4);
+    color: var(--text);
+}
+
+/* Left sidebar: button on right (inner) edge */
+.sidebar-left .sidebar-hide-btn {
+    right: 0;
+    border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+    border-right: none;
+}
+
+/* Right sidebar: button OUTSIDE — uses position:fixed to escape overflow:hidden */
+.sidebar-hide-right {
+    position: fixed;
+    right: var(--sidebar-right-width, 240px);
+    left: auto;
+    border-radius: 8px 0 0 8px;
+    border-right: none;
+    border-left: 1px solid var(--border);
+    z-index: 101;
+}
+
+/* When right panel is collapsed, hide the button */
+.app.right-collapsed .sidebar-hide-right {
+    display: none;
+}
+
+/* Make sidebars relative for absolute positioning */
+.sidebar-left,
+.sidebar-right {
+    position: relative;
+}
