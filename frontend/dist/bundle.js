@@ -4189,7 +4189,7 @@ CAN-DO C2 (the user is learning these skills \u2014 your answers must MODEL them
     const teacherMode = teacherModeRadio?.value || "standard";
     const germanOnlyMode = localStorage.getItem("germanOnlyMode") === "true";
     const config = {
-      api_key: localStorage.getItem("gemini_api_key"),
+      api_key: localStorage.getItem("gemini_api_key") || "",
       voice: localStorage.getItem("gemini_voice") || "Puck",
       has_video: mode === "camera" || mode === "screen",
       teacher_mode: teacherMode,
