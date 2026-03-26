@@ -4057,8 +4057,7 @@ CAN-DO C2 (the user is learning these skills \u2014 your answers must MODEL them
     const elements2 = getElements();
     const state2 = getState();
     if (!apiKey) {
-      addSystemMessage2("\u274C Set API key first");
-      return;
+      console.log("[WebSocket] No API key provided locally, server will use environment variable fallback");
     }
     let chatId = getCurrentChatId() || state2.currentChatId;
     if (!chatId) {
